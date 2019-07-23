@@ -1,0 +1,17 @@
+{
+  "name": "ethereum_ide_server",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon --watch app.js --watch src"
+  },
+  "author": "Olivier Kopp",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "solc": "^0.5.10",
+    "web3": "^1.0.0-beta.55"
+  }
+}
