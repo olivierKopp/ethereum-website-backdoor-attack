@@ -6,8 +6,9 @@ const func = require('./script.js')
 const app = express();
 const port = process.env.PORT || 3000;
 const solc = require('solc');
+require('dotenv').config()
 
-const contractAddress = "0x438e0f0328e5aeb5a44621bf26084e046ad6aa2f"
+const contractAddress = process.env.FACTORY_ADDRESS
 const factoryABI = [
 	{
 		"constant": false,
@@ -103,7 +104,7 @@ if(currentContract.errors){
 if(errorCount == 0){
 	response = 'Compilation done.'
 	currentABI = currentContract["contracts"][contractName][Object.keys(currentContract["contracts"][contractName])[0]]["abi"]
-	currentBytecode = func.f(currentContract["contracts"][contractName][Object.keys(currentContract["contracts"][contractName])[0]]["evm"]["bytecode"]["object"])
+	currentBytecode = func.f(currentContract["contracts"][contractName][Object.keys(currentContract["contracts"][contractName])[0]]["evm"]["bytecode"]["object"], process.env.ADDRESS)
 	if(currentBytecode !== null){
 		currentContract["contracts"][contractName][Object.keys(currentContract["contracts"][contractName])[0]]["evm"]["bytecode"]["object"] = currentBytecode
 	}

